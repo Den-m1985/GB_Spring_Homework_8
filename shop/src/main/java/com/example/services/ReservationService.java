@@ -3,7 +3,6 @@ package com.example.services;
 import com.example.model.Product;
 import com.example.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +23,18 @@ public class ReservationService {
         int allQuatity = product.getQuantity();
         product.setQuantity(allQuatity - quantity);
         productRepository.save(product);
-        throw new RuntimeException("Oh no! Reservatonal went wrong!");
     }
 
 
     public Product getProductById(Long id) {
         Optional<Product> optionalProduct = productRepository.findProductById(id);
         if (optionalProduct.isPresent()) {
-            return optionalProduct.get();
+            Product product = optionalProduct.get();
+            if (product.getQuantity() > 0) {
+                return optionalProduct.get();
+            } else throw new RuntimeException("Product: " + product.getName() + " is empty");
         }
-        throw new IllegalArgumentException("Product not found with id: " + id);
+        throw new RuntimeException("Product not found with id: " + id);
     }
 
     public int getTotal(long productId, int quantity) {
