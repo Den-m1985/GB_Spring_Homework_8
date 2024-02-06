@@ -3,39 +3,47 @@ package com.example.services;
 import com.example.model.Account;
 import com.example.repositories.AccountRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
 public class PaymentService {
 
-    private final AccountRepository accountRepository;
+
+    private AccountRepository accountRepository;
+
 
     @Transactional
-    public void processPayment(String userId, double amount) {
-        // Логика обработки платежа
+    public void transferMoney(long AccountId, int totalPrice) {
+        Account account = getAccountById(AccountId);
+
+        BigDecimal price = BigDecimal.valueOf(totalPrice);
+        BigDecimal newAmount = account.getAmount().subtract(price);
+        account.setAmount(newAmount);
+
+        accountRepository.save(account);
+        //Часть 2
+        throw new RuntimeException("Oh no! Transfer money went wrong!");
     }
 
-    @Transactional
-    public void transferMoney(long idSender, long idReceiver, BigDecimal amount) {
-        Account sender = accountRepository.findAccountById(idSender);
-        Account receiver = accountRepository.findAccountById(idReceiver);
 
-        BigDecimal senderNewAmount = sender.getAmount().subtract(amount);
-        BigDecimal receiverNewAmount = receiver.getAmount().add(amount);
-
-        accountRepository.changeAmount(idSender, senderNewAmount);
-        accountRepository.changeAmount(idReceiver, receiverNewAmount);
-        //Часть 2
-        throw new RuntimeException("Oh no! Something went wrong!");
+    public Account getAccountById(Long id) {
+        Optional<Account> optionalAccount = accountRepository.findById(id);
+        if (optionalAccount.isPresent()) {
+            return optionalAccount.get();
+        }
+        throw new IllegalArgumentException("Account not found with id: " + id);
     }
 
     public List<Account> getAllAccounts() {
-        return accountRepository.findAllAccounts();
+        return accountRepository.findAll();
     }
 
 }

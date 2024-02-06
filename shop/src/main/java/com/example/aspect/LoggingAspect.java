@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    @Before("execution(* *.*(..))")
+    @Before("execution(* org.example.services.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         System.out.println("Executing: " + joinPoint.getSignature().getName());
     }

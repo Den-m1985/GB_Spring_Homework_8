@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimingAspect {
 
-    @Around("execution(* *.*(..))")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("execution(* org.example.services.*.*(..))")
+    public Object measureMethodExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable{
         long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
-        long executionTime = System.currentTimeMillis() - start;
-        System.out.println(joinPoint.getSignature().getName() + " executed in " + executionTime + "ms");
-        return proceed;
+        Object result = joinPoint.proceed();
+        long elapsedTime = System.currentTimeMillis() -start;
+        System.out.println("Метод: "+joinPoint.getSignature().getName() + " - "+elapsedTime+" милсек");
+        return result;
     }
 
 }
