@@ -20,10 +20,12 @@ _______________________________________________
 
 Запуск из конфигурации "run" в idea
 Запустятся 2 модуля.
-Главная страница (get запрос):  http://localhost:8080/shop/
-Переход по товарам (get запрос): http://localhost:8080/shop/product/1
-Покупка товара (post запрос): http://localhost:8080/shop/buyProduct
 
+Главная страница (get запрос):  http://localhost:8080/shop/
+
+Переход по товарам (get запрос): http://localhost:8080/shop/product/1
+
+Покупка товара (post запрос): http://localhost:8080/shop/buyProduct
 
 гайд по микросервисам
 https://habr.com/ru/articles/682720/
