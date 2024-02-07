@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: microservice-shop
+
+server:
+  port: 8080

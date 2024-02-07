@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-
 @Component
 @AllArgsConstructor
 public class FillDataBase implements CommandLineRunner {
@@ -15,7 +13,7 @@ public class FillDataBase implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         // Добавление нескольких товаров
         productRepository.save(new Product("Laptop", 10, 1200));
