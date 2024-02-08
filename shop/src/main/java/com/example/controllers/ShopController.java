@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.model.Product;
+import com.example.config.UrlProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,8 @@ public class ShopController {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private UrlProperties urlProperties;
 
 
     /**
@@ -30,7 +33,7 @@ public class ShopController {
      */
     @GetMapping("/")
     public String getProductFromWarehouse(Model model) {
-        String warehouseUrl = "http://localhost:8081/warehouse/getProducts"; // URL модуля warehouse
+        String warehouseUrl = urlProperties.getUriGetProducts(); // URL модуля warehouse
         ResponseEntity<List<Product>> response = restTemplate.exchange(
                 warehouseUrl,
                 HttpMethod.GET,
@@ -53,7 +56,7 @@ public class ShopController {
      */
     @GetMapping("/product/{id}")
     public String getProductDetails(@PathVariable Long id, Model model) {
-        String warehouseUrl = "http://localhost:8081/warehouse/getProduct/" + id; // URL модуля warehouse
+        String warehouseUrl = urlProperties.getUriGetProduct() + id; // URL модуля warehouse
         ResponseEntity<Product> response = restTemplate.exchange(
                 warehouseUrl,
                 HttpMethod.GET,
@@ -77,7 +80,7 @@ public class ShopController {
      */
     @PostMapping("/buyProduct")
     public ResponseEntity<String> buyProduct(@RequestParam Long productId, @RequestParam int quantity) {
-        String warehouseUrl = "http://localhost:8081/warehouse/reserveProduct"; // URL метода резервации
+        String warehouseUrl = urlProperties.getReserveProduct(); // URL метода резервации
         MultiValueMap<String, Long> map = new LinkedMultiValueMap<>();
         map.add("productId", productId);
         map.add("quantity", (long) quantity);
