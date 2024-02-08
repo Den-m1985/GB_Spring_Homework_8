@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89c4bd23-7365-419a-a003-992d4c5d71b6" name="Changes" comment="add idea files">
+    <list default="true" id="89c4bd23-7365-419a-a003-992d4c5d71b6" name="Changes" comment="delete url from controller">
+      <change afterPath="$PROJECT_DIR$/shop/src/main/java/com/example/config/UrlProperties.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shop/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/example/controllers/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop/src/main/java/com/example/controllers/ShopController.java" afterDir="false" />
@@ -147,6 +148,7 @@
     <MESSAGE value="redid ReadMe" />
     <MESSAGE value="finish ReadMe" />
     <MESSAGE value="add idea files" />
-    <option name="LAST_COMMIT_MESSAGE" value="add idea files" />
+    <MESSAGE value="delete url from controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete url from controller" />
   </component>
 </project>
